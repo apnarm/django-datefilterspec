@@ -22,6 +22,9 @@
     #changelist-filter a {
         display: inline;
     }
+    #changelist-filter ul.daterange-filter {
+        margin-left: 0;
+    }
 </style>
 
 <script>
@@ -36,16 +39,18 @@
 </script>
 
 {% with choices.0 as i %}
-<form method="GET" action="">
-    {{ spec.form.media }}
-    {{ spec.form.as_p }}
-    <p class="submit-row">
-        {#create hidden inputs to preserve values from other filters and search field#}
-        {% for k, v in i.get_query.items %}
-                <input type="hidden" name="{{ k }}" value="{{ v }}">
-        {% endfor %}    
-    <input type="submit" value="{% trans "Search" %}">
-    <input type="reset" id="resetBtn" value="{% trans "Clear" %}">
-    </p>
-</form>
+<ul class="daterange-filter">
+    <form method="GET" action="">
+        {{ spec.form.media }}
+        {{ spec.form.as_p }}
+        <p class="submit-row">
+            {#create hidden inputs to preserve values from other filters and search field#}
+            {% for k, v in i.get_query.items %}
+                    <input type="hidden" name="{{ k }}" value="{{ v }}">
+            {% endfor %}
+        <input type="submit" value="{% trans "Search" %}">
+        <input type="reset" id="resetBtn" value="{% trans "Clear" %}">
+        </p>
+    </form>
+</ul>
 {% endwith %}
